@@ -30,7 +30,7 @@ public class Rei_search_bar_calculationsClient implements ClientModInitializer {
                     String text = CalculatorSearch.format(REIRuntime.getInstance().getSearchTextField().getText());
                     if (text.contains("=")) {
                         if (!client.player.getGameMode().isCreative()) textPosX += 10;
-                        context.drawText(tr, Text.literal(text), textPosX, textPosY, 0xFF55FF55, false);
+                        context.drawText(tr, Text.literal(text), textPosX, textPosY, 0x55FF55, false);
                     }
                 });
             }
