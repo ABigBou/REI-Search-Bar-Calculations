@@ -20,16 +20,25 @@ public class CalculatorSearch implements REIClientPlugin {
     }
 
     private static String calculateInSearchBar(String input) {
+        // Clean invisible formatting characters from the input
+        input = sanitize(input);
+
         if (!lastInput.equals(input)) {
             lastInput = input;
             try {
                 BigDecimal calculate = Calculator.calculate(input);
-                lastResult = new DecimalFormat("#,##0.##").format(calculate);
+                String formatted = new DecimalFormat("#,##0.##").format(calculate);
+                lastResult = sanitize(formatted);
             } catch (Calculator.CalculatorException ignored) {
                 lastResult = null;
             }
         }
 
         return lastResult;
+    }
+
+    // Remove all invisible formatting/control characters (like LRM, RLM, etc.)
+    private static String sanitize(String str) {
+        return str == null ? null : str.replaceAll("\\p{Cf}", "");
     }
 }
