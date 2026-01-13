@@ -11,10 +11,10 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "me.BigBou.rei_search_bar_calculations.client.Rei_search_bar_calculationsClient"
+      "me.BigBou.rei_search_bar_calculations.client.ReiSearchBarCalculationsClient"
     ],
     "main": [
-      "me.BigBou.rei_search_bar_calculations.Rei_search_bar_calculations"
+      "me.BigBou.rei_search_bar_calculations.ReiSearchBarCalculations"
     ],
     "rei_client": [
       "me.BigBou.rei_search_bar_calculations.client.CalculatorSearch"

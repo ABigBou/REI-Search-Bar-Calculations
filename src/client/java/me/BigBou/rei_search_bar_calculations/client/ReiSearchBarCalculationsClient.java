@@ -13,9 +13,9 @@ import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Rei_search_bar_calculationsClient implements ClientModInitializer {
+public class ReiSearchBarCalculationsClient implements ClientModInitializer {
 
-    private static final Logger log = LoggerFactory.getLogger(Rei_search_bar_calculationsClient.class);
+    private static final Logger log = LoggerFactory.getLogger(ReiSearchBarCalculationsClient.class);
 
     @Override
     public void onInitializeClient() {
