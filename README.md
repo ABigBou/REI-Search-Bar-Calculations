@@ -27,4 +27,6 @@ A simple and fast calculator for everyday use!
 
 This mod was mostly made because of Hypixel Skyblock's recent update which forces players to use 1.21.5 for their newest content island, and a new mod for REI added skyblock items to it, was supposed to be the replacement for NEU for the newer version, however, REI lacks this quality of life feature I personally have been missing and my aim is to reach players like me who have also felt the lack of this feature to be annoying, with that I also encourage anyone using REI to give this mod a chance as it does add some nice utility to it if you are playing on a modpack and don't want to open your calculator app every time you need to calculate something.
 
+Something I also wanted to make clear is that I did not make the calculator functionality itself, it was entirely made by the team behind NEU, I took it and implemented it into my own mod which is allowed under their licensing.
+
 ### **Hope you enjoy using it!**
