@@ -4,8 +4,6 @@ import net.fabricmc.api.ModInitializer;
 
 public class ReiSearchBarCalculations implements ModInitializer {
 
-
-
     @Override
     public void onInitialize() {
     }
