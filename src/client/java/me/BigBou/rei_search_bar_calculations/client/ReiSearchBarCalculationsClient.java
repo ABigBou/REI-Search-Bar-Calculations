@@ -20,6 +20,7 @@ import net.minecraft.world.GameMode;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import me.shedaniel.rei.api.client.gui.screen.DisplayScreen;
 
 public class ReiSearchBarCalculationsClient implements ClientModInitializer {
 
@@ -56,11 +57,11 @@ public class ReiSearchBarCalculationsClient implements ClientModInitializer {
     public void onInitializeClient() {
         MyConfig.HANDLER.load();
         ScreenEvents.BEFORE_INIT.register((client, screen, sw, sh) -> {
-            if (screen instanceof HandledScreen<?> handled) {
+            if (screen instanceof HandledScreen<?> handled || screen instanceof DisplayScreen displayScreen) {
                 ScreenEvents.afterRender(screen).register((scr, context, mouseX, mouseY, delta) -> {
                     TextRenderer tr = MinecraftClient.getInstance().textRenderer;
-                    int centerX = handled.width / 2;
-                    int bottomY = handled.height;
+                    int centerX = screen.width / 2;
+                    int bottomY = screen.height;
                     int textPosX = centerX - 94 + MyConfig.HANDLER.instance().xOffset;
                     int textPosY = bottomY - 32 - MyConfig.HANDLER.instance().yOffset;
                     String text = CalculatorSearch.format(REIRuntime.getInstance().getSearchTextField().getText());
