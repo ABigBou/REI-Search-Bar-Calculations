@@ -76,7 +76,7 @@ public class ReiSearchBarCalculationsClient implements ClientModInitializer {
 
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
             dispatcher.register(ClientCommandManager.literal("calc")
-                    .then(ClientCommandManager.argument("value", StringArgumentType.string())
+                    .then(ClientCommandManager.argument("value", StringArgumentType.greedyString())
                             .executes(CalculatorCommand::executeCommandWithArg)));
         });
     }
