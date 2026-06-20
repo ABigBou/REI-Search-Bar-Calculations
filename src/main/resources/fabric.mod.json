@@ -12,27 +12,22 @@
   "entrypoints": {
     "client": [
       "me.BigBou.rei_search_bar_calculations.client.ReiSearchBarCalculationsClient"
-    ],
-    "main": [
+    ], "main": [
       "me.BigBou.rei_search_bar_calculations.ReiSearchBarCalculations"
-    ],
-    "rei_client": [
+    ], "rei_client": [
       "me.BigBou.rei_search_bar_calculations.client.CalculatorSearch"
-    ],
-    "modmenu": [
+    ], "modmenu": [
       "me.BigBou.rei_search_bar_calculations.client.ModMenuIntegration"
     ]
   },
   "mixins": [
-    "rei_search_bar_calculations.mixins.json",
-    {
-      "config": "rei_search_bar_calculations.client.mixins.json",
-      "environment": "client"
+    "rei_search_bar_calculations.mixins.json", {
+      "config": "rei_search_bar_calculations.client.mixins.json", "environment": "client"
     }
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
+    "fabric-api": "*",
     "minecraft": ">=${minecraft_version}",
     "roughlyenoughitems": ">=${rei_version}",
     "yet_another_config_lib_v3": ">=${yacl_version}",
