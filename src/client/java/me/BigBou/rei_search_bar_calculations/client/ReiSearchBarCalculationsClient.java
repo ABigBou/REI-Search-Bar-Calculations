@@ -8,6 +8,7 @@ import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
 import me.shedaniel.rei.api.client.REIRuntime;
 import me.shedaniel.rei.api.client.gui.screen.DisplayScreen;
+import me.shedaniel.rei.api.client.gui.widgets.TextField;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommands;
@@ -17,8 +18,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.GameType;
-import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,17 +57,20 @@ public class ReiSearchBarCalculationsClient implements ClientModInitializer {
         MyConfig.HANDLER.load();
         ScreenEvents.BEFORE_INIT.register((client, screen, sw, sh) -> {
             if (screen instanceof AbstractContainerScreen<?> || screen instanceof DisplayScreen) {
-                ScreenEvents.afterExtract(screen).register((scr, context, mouseX, mouseY, _) -> {
+                ScreenEvents.afterExtract(screen).register((scr, context, mouseX, mouseY, tickProgress) -> {
                     Font font = Minecraft.getInstance().font;
                     int centerX = screen.width / 2;
                     int bottomY = screen.height;
-                    int textPosX = centerX - 94 + MyConfig.HANDLER.instance().xOffset;
+                    int textPosX = centerX - 84 + MyConfig.HANDLER.instance().xOffset;
                     int textPosY = bottomY - 32 - MyConfig.HANDLER.instance().yOffset;
-                    String text = CalculatorSearch.format(REIRuntime.getInstance().getSearchTextField().getText());
-                    if (text.contains("=")) {
-                        GameType gameMode = ObjectUtils.getIfNull(client.player.gameMode(), GameType.SURVIVAL);
-                        if (!gameMode.isCreative()) textPosX += 10;
-                        context.text(font, Component.literal(text), textPosX, textPosY, 0xFF55FF55, false);
+                    TextField searchField = REIRuntime.getInstance().getSearchTextField();
+                    if (searchField != null) {
+                        String text = CalculatorSearch.format(searchField.getText());
+                        if (text.contains("=")) {
+                            if (client.player != null && client.player.gameMode() != null && client.player.gameMode().isCreative())
+                                textPosX -= 10;
+                            context.text(font, Component.literal(text), textPosX, textPosY, 0xFF55FF55, false);
+                        }
                     }
                 });
             }
