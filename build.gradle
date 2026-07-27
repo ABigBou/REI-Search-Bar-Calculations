@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.15-SNAPSHOT'
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
     id 'maven-publish'
 }
 
@@ -28,14 +28,10 @@ repositories {
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
-    maven { url "https://maven.shedaniel.me" }
+    maven { url = "https://maven.shedaniel.me" }
     maven {
-        name = "CottonMC"
-        url = "https://server.bbkr.space/artifactory/libs-release"
-    }
-    maven {
-        name 'Xander Maven'
-        url 'https://maven.isxander.dev/releases'
+        name = 'Xander Maven'
+        url = 'https://maven.isxander.dev/releases'
     }
     maven {
         name = "Terraformers"
@@ -46,39 +42,44 @@ repositories {
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
-    modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
+    implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}"
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}"
+    compileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
+    runtimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+    compileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}"
 }
 
 processResources {
-    inputs.property "version", project.version
-    inputs.property "minecraft_version", project.minecraft_version
-    inputs.property "loader_version", project.loader_version
-    inputs.property "rei_version", project.rei_version
-    inputs.property "yacl_version", project.yacl_version
-    inputs.property "modmenu_version", project.modmenu_version
-    filteringCharset "UTF-8"
+    def version = project.version
+    def minecraft_version = project.minecraft_version
+    def loader_version = project.loader_version
+    def rei_version = project.rei_version
+    def yacl_version = project.yacl_version
+    def modmenu_version = project.modmenu_version
+
+    inputs.property "version", version
+    inputs.property "minecraft_version", minecraft_version
+    inputs.property "loader_version", loader_version
+    inputs.property "rei_version", rei_version
+    inputs.property "yacl_version", yacl_version
+    inputs.property "modmenu_version", modmenu_version
+    filteringCharset = "UTF-8"
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version,
-                "minecraft_version": project.minecraft_version,
-                "loader_version": project.loader_version,
-                "rei_version": project.rei_version,
-                "yacl_version": project.yacl_version,
-                "modmenu_version": project.modmenu_version
+        expand "version": version,
+                "minecraft_version": minecraft_version,
+                "loader_version": loader_version,
+                "rei_version": rei_version,
+                "yacl_version": yacl_version,
+                "modmenu_version": modmenu_version
     }
 }
 
-def targetJavaVersion = 21
+def targetJavaVersion = 25
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
     // this fixes some edge cases with special characters not displaying correctly
