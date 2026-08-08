@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.15-SNAPSHOT'
+    id 'net.fabricmc.fabric-loom' version '1.17-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -29,10 +29,11 @@ repositories {
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
     maven { url "https://maven.shedaniel.me" }
-    maven {
-        name = "CottonMC"
-        url = "https://server.bbkr.space/artifactory/libs-release"
-    }
+    // CottonMC repo seem inaccessible
+    //maven {
+    //    name = "CottonMC"
+    //    url = "https://server.bbkr.space/artifactory/libs-release"
+    //}
     maven {
         name 'Xander Maven'
         url 'https://maven.isxander.dev/releases'
@@ -44,19 +45,19 @@ repositories {
 }
 
 dependencies {
-    // To change the versions see the gradle.properties file
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    minecraft("com.mojang:minecraft:${project.minecraft_version}")
+    implementation("net.fabricmc:fabric-loader:${project.loader_version}")
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
-    modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+    implementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
+    implementation("dev.isxander:yet-another-config-lib:${project.yacl_version}")
+    implementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}"
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}"
+    compileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}") {
+        exclude "group": "net.fabricmc.fabric-api"
+    }
+    runtimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}")
+    compileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}")
+    runtimeOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}")
 }
 
 processResources {
@@ -78,7 +79,7 @@ processResources {
     }
 }
 
-def targetJavaVersion = 21
+def targetJavaVersion = 25
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
     // this fixes some edge cases with special characters not displaying correctly

@@ -5,11 +5,11 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 
 public class MyConfig {
     public static ConfigClassHandler<MyConfig> HANDLER = ConfigClassHandler.createBuilder(MyConfig.class)
-            .id(Identifier.of("rei_search_bar_calculations", "config"))
+            .id(Identifier.fromNamespaceAndPath("rei_search_bar_calculations", "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FabricLoader.getInstance().getConfigDir().resolve("rei_search_bar_calculations.json5"))
                     .appendGsonBuilder(GsonBuilder::setPrettyPrinting)
