@@ -32,7 +32,7 @@
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
+    "fabric-api": "*",
     "minecraft": ">=${minecraft_version}",
     "roughlyenoughitems": ">=${rei_version}",
     "yet_another_config_lib_v3": ">=${yacl_version}",
