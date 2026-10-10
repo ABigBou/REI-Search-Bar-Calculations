@@ -22,8 +22,10 @@ A simple and fast calculator for everyday use!
 
 ## 📖 Dependencies
 **[REI](https://modrinth.com/mod/rei)**
+
 **[YACL](https://modrinth.com/mod/yacl)**
-**https://modrinth.com/mod/modmenu**
+
+**[Mod Menu](https://modrinth.com/mod/modmenu)**
 
 ## 📖 Why I made this mod?
 
