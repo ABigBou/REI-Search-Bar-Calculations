@@ -51,6 +51,7 @@ dependencies {
     compileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
     runtimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
     compileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}"
+    localRuntime 'net.litetex.mcm:dev-auth-neo:1.1.0'
 }
 
 processResources {
